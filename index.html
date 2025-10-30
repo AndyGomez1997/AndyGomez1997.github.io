@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil de GitHub - Portafolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons for aesthetic -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Personalización de Tailwind */
+        :root {
+            scroll-behavior: smooth;
+        }
+        
+        .animated-gradient {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .project-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-track {
+            display: flex;
+            animation: scroll-left 30s linear infinite;
+            width: fit-content; /* Esencial para el desplazamiento infinito */
+        }
+
+        .academy-logo {
+            flex-shrink: 0;
+            width: 250px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 3rem;
+            text-align: center;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Desplaza la mitad de la pista */
+        }
+
+        /* Utilidad para las animaciones de aparición */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+    
+    <!-- 1. BARRA DE NAVEGACIÓN (Sticky) -->
+    <nav class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 text-2xl font-bold text-transparent bg-clip-text animated-gradient">
+                    &lt;Mi Portafolio /&gt;
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#hero" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition duration-200">Inicio</a>
+                    <a href="#academias" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition duration-200">Academias</a>
+                    <a href="#proyectos" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition duration-200">Proyectos</a>
+                    <a href="#contactame" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition duration-200">Contáctame</a>
+                </div>
+                <!-- Menú móvil (solo placeholder, el JS no está implementado para simplicidad, pero el menú es funcional) -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- 2. SECCIÓN HERO (Cabecera) -->
+        <section id="hero" class="text-center py-20 md:py-32 fade-in">
+            <div class="w-32 h-32 md:w-48 md:h-48 rounded-full animated-gradient p-1 mx-auto shadow-2xl transition duration-500 hover:scale-105">
+                <!-- Espacio para la foto de perfil -->
+                <div class="w-full h-full rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
+                    <img src="https://placehold.co/190x190/1f2937/ffffff?text=FOTO" onerror="this.src='https://placehold.co/190x190/1f2937/ffffff?text=FOTO'" alt="[Imagen de perfil]" class="object-cover w-full h-full">
+                </div>
+            </div>
+            <h1 class="mt-8 text-4xl sm:text-6xl font-extrabold tracking-tight text-white">
+                Hola, soy <span class="text-transparent bg-clip-text animated-gradient">Tu Nombre</span>
+            </h1>
+            <p class="mt-4 text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto">
+                Desarrollador Full Stack | Creador de Soluciones Digitales | Entusiasta de GitHub.
+            </p>
+            <div class="mt-8">
+                <a href="https://github.com/tu-usuario" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 transition duration-300 transform hover:scale-105">
+                    <i data-lucide="github" class="w-5 h-5 mr-2"></i>
+                    Ver Perfil de GitHub
+                </a>
+            </div>
+        </section>
+
+        <!-- 3. CARRUSEL DE ACADEMIAS -->
+        <section id="academias" class="py-16 overflow-hidden relative fade-in">
+            <h2 class="text-3xl font-bold text-center mb-10 text-white">Formación y Certificaciones</h2>
+            <div class="relative w-full">
+                <!-- Contenedor del Carrusel (doble pista para efecto infinito) -->
+                <div class="carousel-track flex">
+                    <!-- Grupo 1: Contenido original -->
+                    <div class="flex">
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="code" class="w-8 h-8 text-pink-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Platzi</p>
+                        </div>
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="zap" class="w-8 h-8 text-yellow-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Academind</p>
+                        </div>
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="laptop" class="w-8 h-8 text-green-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Udemy / FreeCodeCamp</p>
+                        </div>
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="database" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Bootcamp X</p>
+                        </div>
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="globe" class="w-8 h-8 text-red-500 mb-2"></i>
+                            <p class="text-sm font-semibold">LinkedIn Learning</p>
+                        </div>
+                    </div>
+                    <!-- Grupo 2: Contenido duplicado para desplazamiento continuo -->
+                    <div class="flex">
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="code" class="w-8 h-8 text-pink-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Platzi</p>
+                        </div>
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="zap" class="w-8 h-8 text-yellow-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Academind</p>
+                        </div>
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="laptop" class="w-8 h-8 text-green-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Udemy / FreeCodeCamp</p>
+                        </div>
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="database" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Bootcamp X</p>
+                        </div>
+                        <div class="academy-logo bg-gray-800 rounded-lg shadow-md p-4 flex-col">
+                            <i data-lucide="globe" class="w-8 h-8 text-red-500 mb-2"></i>
+                            <p class="text-sm font-semibold">LinkedIn Learning</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SECCIÓN DE PROYECTOS (Grid) -->
+        <section id="proyectos" class="py-16 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-10 text-white">Proyectos Destacados</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Proyecto 1 -->
+                <div class="project-card bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer" onclick="window.open('https://github.com/tu-usuario/proyecto1', '_blank')">
+                    <img src="https://placehold.co/600x400/374151/ffffff?text=PROYECTO+1" alt="[Imagen de Proyecto 1]" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400">Plataforma E-commerce</h3>
+                        <p class="mt-2 text-gray-400 text-sm">Desarrollo de una plataforma completa utilizando React, Node.js y MongoDB.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="text-xs font-medium bg-cyan-900/50 text-cyan-300 px-2 py-1 rounded-full">React</span>
+                            <span class="text-xs font-medium bg-green-900/50 text-green-300 px-2 py-1 rounded-full">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="project-card bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer" onclick="window.open('https://github.com/tu-usuario/proyecto2', '_blank')">
+                    <img src="https://placehold.co/600x400/374151/ffffff?text=PROYECTO+2" alt="[Imagen de Proyecto 2]" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400">API de Microservicios</h3>
+                        <p class="mt-2 text-gray-400 text-sm">Implementación de microservicios con Python (Flask) y Docker para escalabilidad.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="text-xs font-medium bg-yellow-900/50 text-yellow-300 px-2 py-1 rounded-full">Python</span>
+                            <span class="text-xs font-medium bg-blue-900/50 text-blue-300 px-2 py-1 rounded-full">Docker</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3 -->
+                <div class="project-card bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer" onclick="window.open('https://github.com/tu-usuario/proyecto3', '_blank')">
+                    <img src="https://placehold.co/600x400/374151/ffffff?text=PROYECTO+3" alt="[Imagen de Proyecto 3]" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400">Juego Web con Canvas</h3>
+                        <p class="mt-2 text-gray-400 text-sm">Pequeño juego interactivo desarrollado completamente con HTML5 Canvas y JavaScript puro.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="text-xs font-medium bg-red-900/50 text-red-300 px-2 py-1 rounded-full">JavaScript</span>
+                            <span class="text-xs font-medium bg-teal-900/50 text-teal-300 px-2 py-1 rounded-full">HTML5/CSS3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="https://github.com/tu-usuario?tab=repositories" target="_blank" class="inline-flex items-center px-6 py-3 border border-gray-600 text-base font-medium rounded-full shadow-sm text-cyan-400 hover:text-white hover:bg-gray-800 transition duration-300 transform hover:scale-105">
+                    Ver Todos los Repositorios
+                    <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                </a>
+            </div>
+        </section>
+        
+        <!-- 5. SECCIÓN CONTÁCTAME (Pre-footer) -->
+        <section id="contactame" class="py-16 fade-in">
+            <div class="text-center p-10 rounded-xl animated-gradient bg-gray-800 shadow-2xl">
+                <h2 class="text-3xl font-bold text-white mb-4">¿Hablemos de tu Próximo Proyecto?</h2>
+                <p class="text-xl text-gray-200 mb-8 max-w-xl mx-auto">
+                    Estoy disponible para colaboraciones freelance o nuevas oportunidades laborales. ¡No dudes en contactarme!
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="mailto:tu.correo@ejemplo.com" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-gray-900 bg-white hover:bg-gray-200 transition duration-300 transform hover:scale-105">
+                        <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                        Enviar un Correo
+                    </a>
+                    <a href="https://www.linkedin.com/in/tu-usuario" target="_blank" class="inline-flex items-center px-6 py-3 border border-white text-base font-medium rounded-full shadow-lg text-white hover:bg-white hover:text-gray-900 transition duration-300 transform hover:scale-105">
+                        <i data-lucide="linkedin" class="w-5 h-5 mr-2"></i>
+                        Mi LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>&copy; 2024 Mi Portafolio de Desarrollador. Creado con ❤️ y Gemini.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts de Firebase y Funcionalidad -->
+    <script type="module">
+        // Importaciones de Firebase (necesarias para el entorno Canvas)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Variables globales del entorno
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app;
+        let db;
+        let auth;
+
+        async function initializeFirebase() {
+            try {
+                if (Object.keys(firebaseConfig).length > 0) {
+                    app = initializeApp(firebaseConfig);
+                    db = getFirestore(app);
+                    auth = getAuth(app);
+                    setLogLevel('debug'); // Configura el nivel de log para depuración
+
+                    // Autenticación obligatoria
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                        console.log("Usuario autenticado con token personalizado.");
+                    } else {
+                        await signInAnonymously(auth);
+                        console.log("Usuario autenticado anónimamente.");
+                    }
+                } else {
+                    console.warn("Configuración de Firebase no disponible.");
+                }
+            } catch (error) {
+                console.error("Error al inicializar Firebase o autenticar:", error);
+            }
+        }
+
+        // --- FUNCIONALIDAD ADICIONAL (Animaciones y Lucide Icons) ---
+
+        // Función para inicializar los íconos Lucide
+        function initializeLucide() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        // Función para gestionar la animación de aparición (Intersection Observer)
+        function setupIntersectionObserver() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Aparece cuando el 10% del elemento es visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target); // Dejar de observar una vez que ha aparecido
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
+            });
+        }
+        
+        // Inicialización al cargar la ventana
+        window.addEventListener('load', () => {
+            initializeFirebase();
+            initializeLucide();
+            setupIntersectionObserver();
+        });
+
+    </script>
+</body>
+</html>
